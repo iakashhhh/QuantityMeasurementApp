@@ -24,6 +24,7 @@ hs_err_pid*
 replay_pid*
 
 
+
 # Build outputs
 /target/
 *.class
@@ -84,3 +85,6 @@ build/
 ### OS files ###
 .DS_Store
 Thumbs.db
+
+/.metadata/
+
