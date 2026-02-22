@@ -8,5 +8,7 @@ public class QuantityMeasurementApp {
 		Feet f2 = new Feet(1.0);
 
 		System.out.println("Equal: " + f1.equals(f2));
+		
+		Inches.demonstrateInchesEquality();
 	}
 }
