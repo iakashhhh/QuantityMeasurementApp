@@ -553,3 +553,64 @@ Successfully introduced Temperature measurement with proper conversion handling 
 Refactored the system using `IMeasurable` abstraction, making the architecture more flexible, extensible, and aligned with SOLID design principles.
 
 🔗 [feature/UC14-temperaturemeasurement](https://github.com/iakashhhh/QuantityMeasurementApp/tree/feature/UC14-temperaturemeasurement/src)
+
+---
+
+###  UC15: N-Tier Architecture Refactoring
+
+- Description: UC15 restructures the Quantity Measurement App into a layered architecture by introducing Controller, Service, Repository, DTO, Model, and Entity layers. This separation improves maintainability, modularity, and testability while preserving all measurement logic implemented in previous use cases.
+
+- Architecture:
+
+  - **Controller** – Handles requests and delegates operations to the service layer.
+  - **Service** – Contains business logic and coordinates conversions and operations.
+  - **Repository** – Provides a cache-based storage layer.
+  - **DTO / Model / Entity** – Used for structured data transfer and internal representation.
+
+- Implementation:
+
+  - Introduced `QuantityMeasurementController`, `QuantityMeasurementServiceImpl`, and `QuantityMeasurementCacheRepository`.
+  - Added `QuantityDTO`, `QuantityModel`, and `QuantityMeasurementEntity`.
+  - Service performs **DTO → Model → Quantity → Model → DTO** transformation.
+  - Reuses the existing generic `Quantity` engine and unit enums from previous UCs.
+
+- Example:
+
+  - `QuantityDTO(10, FEET, LENGTH) + QuantityDTO(12, INCHES, LENGTH) → QuantityDTO(11, FEET, LENGTH)`
+  - `QuantityDTO(100, CELSIUS, TEMPERATURE).equals(QuantityDTO(212, FAHRENHEIT, TEMPERATURE)) → true`
+
+[UC15–Architecture Refactoring](https://github.com/iakashhhh/QuantityMeasurementApp/tree/feature/UC15-NTierArchitecture/src)
+
+---
+
+###  UC16: Database Persistence Layer Integration
+
+* **Description:**
+  UC16 extends the N-Tier architecture by replacing the cache-based repository with a **database-backed persistence layer**. The application now stores and retrieves quantity measurements using JDBC and a connection pool. This improves scalability and enables persistent storage while maintaining the same layered architecture introduced in UC15.
+
+* **Architecture:**
+
+  * **Controller** – Handles incoming requests and forwards them to the service layer.
+  * **Service** – Performs business logic, conversions, and arithmetic operations.
+  * **Repository** – Provides **database-based storage** using JDBC instead of in-memory caching.
+  * **Connection Pool** – Manages reusable database connections for efficient access.
+  * **DTO / Model / Entity** – Continue to support structured data transfer and internal representation.
+
+* **Implementation:**
+
+  * Introduced `QuantityMeasurementDatabaseRepository` to replace the cache repository.
+  * Implemented database operations using **JDBC (`Connection`, `PreparedStatement`, `ResultSet`)**.
+  * Added `ConnectionPool` utility for managing database connections.
+  * Repository stores measurement results in the **`quantity_measurement` table**.
+  * Service layer continues performing **DTO → Model → Quantity → Model → DTO** transformations.
+  * Existing **Controller and Service logic remain unchanged**, ensuring backward compatibility.
+
+* **Example:**
+
+  * `QuantityDTO(5, FEET, LENGTH) + QuantityDTO(24, INCHES, LENGTH) → QuantityDTO(7, FEET, LENGTH)`
+  * Result is **stored in the database** with a unique key.
+  * `find(key)` retrieves the stored measurement entity from the database.
+
+  [UC16–JDBCPersistence](https://github.com/iakashhhh/QuantityMeasurementApp/tree/feature/UC16-JDBCIntegration/src)
+
+---
