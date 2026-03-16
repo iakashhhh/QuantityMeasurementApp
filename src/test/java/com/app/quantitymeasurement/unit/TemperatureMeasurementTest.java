@@ -8,8 +8,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import com.app.quantitymeasurement.temperaturemeasurement.TemperatureUnit;
-
 public class TemperatureMeasurementTest {
 	
 	private static final double EPSILON = 0.0001;
