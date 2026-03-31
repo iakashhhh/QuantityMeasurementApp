@@ -20,4 +20,4 @@
 - **Example:**  
   Login via Google → Receive JWT → Access secured APIs with token
 
-[UC18 - Spring Security](https://github.com/iakashhhh/QuantityMeasurementApp/edit/feature/UC18-GoogleAuthentication)
+[UC18 - Spring Security](https://github.com/iakashhhh/QuantityMeasurementApp/edit/feature/UC18-GoogleAuthentication/src)
