@@ -21,6 +21,6 @@
 - **Example:**  
   `POST /quantity/add` → Returns calculated result stored via JPA
 
-  [UC17 - Spring Backend](https://github.com/iakashhhh/QuantityMeasurementApp/edit/feature/UC17-SpringBackend)
+  [UC17 - Spring Backend](https://github.com/iakashhhh/QuantityMeasurementApp/edit/feature/UC17-SpringBackend/src)
 
 ---
